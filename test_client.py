@@ -3,6 +3,7 @@ import socket
 import threading
 import json
 import cmd
+import sys
 
 class Client:
 
@@ -17,41 +18,57 @@ class Client:
 
 
     def send_message(self,message):
+       
         self.socket.send(json.dumps({
             'type': 'broadcast',
             'sender_id': self.id,
+            'username':self.nickname,
             'message': message
         }).encode())
 
 
     def login(self, userName):
 
-        nickname = userName
+        self.nickname = userName
+        client.isLogin = True 
 
-        self.socket.send(json.dumps({
-            'type': 'login',
-            'nickname': nickname
-        }).encode())
-
+    def logout(self):
+        client.isLogin = False 
+    
 
 
 clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client = Client(clientSocket,None,None,False)
 #print(client.isLogin)
 client.socket.connect(('127.0.0.1', 8888))
+userList = []
 
+id = 0
 while True:
-    print("Please type your command:")
+    print("Please type login [username] to send message:")
     cmd = input()
     
+    if cmd.startswith("exit"):
+        sys.exit("Goodbye!")
+
     if cmd.startswith("login"):
         userName = cmd[6:]
         client.login(userName)
-        break
+        client.id = id +1
+        userList.append(client.nickname)
+        print(userList)
+    else:
+        print("Error: Command should be login [username]")    
 
-    if cmd.startswith("send"):
-        message = cmd[5:]
-        client.send_message(message)
-        print(f"sent {message}")
-        break
-        
+    if client.isLogin is True:
+       print("You can send message now")
+       cmd = input()
+       if cmd.startswith("send"):
+            message = cmd[5:]
+            client.send_message(message)
+            client.isLogin = False
+            print(f"sent {message}")
+    else:
+        print("You have to login before sending message!")
+    
+       
