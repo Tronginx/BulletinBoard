@@ -4,6 +4,7 @@ import threading
 import json
 import cmd
 import sys
+import pickle
 
 class Client:
     # global variable keep track of list of users
@@ -28,14 +29,26 @@ class Client:
             'message': message
         }).encode())
 
+    # function that handles message
+    def message(self,userName):
+        self.socket.send(json.dumps({
+            'type': 'message',
+            'username':userName
+        }).encode())
+
     # function that handles joining
     def join(self, userName):
         self.nickname = userName
         client.hasJoined = True 
 
     # function that connects to a certain port
+<<<<<<< HEAD
     def connect(self,address, portNum):
         self.socket.connect(address, portNum)
+=======
+    def connect(self, address, portNum):
+        client.socket.connect(address, portNum)
+>>>>>>> 54a0d5ae7dc6ce7d00263767ce9bd62bde4e2402
 
 
     
@@ -78,8 +91,13 @@ while True:
         elif cmd == "users":
             print(userList)
         elif cmd.startswith("message"):
-            MsgID = cmd[8:]
-            print("TODO: Print the corresponding message in msg array")
+            sender = cmd[8:]
+            client.message(sender)
+            data = client.socket.recv(4096)
+            data_arr = pickle.loads(data)
+            for msg in data_arr:
+                if msg.startswith(sender):
+                    print(msg)
         elif cmd == "leave":
             client.hasJoined = False
         elif cmd == "exit":
