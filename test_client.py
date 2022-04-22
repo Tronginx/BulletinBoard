@@ -42,13 +42,8 @@ class Client:
         client.hasJoined = True 
 
     # function that connects to a certain port
-<<<<<<< HEAD
-    def connect(self,address, portNum):
-        self.socket.connect(address, portNum)
-=======
     def connect(self, address, portNum):
         client.socket.connect(address, portNum)
->>>>>>> 54a0d5ae7dc6ce7d00263767ce9bd62bde4e2402
 
 
     
