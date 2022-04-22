@@ -7,6 +7,7 @@ import sys
 
 class Client:
 
+    # constructor for the client
     def __init__(self,socket,id,nickname,isLogin):
 
         #super().__init__()
@@ -16,7 +17,7 @@ class Client:
         self.isLogin = isLogin
 
 
-
+    # function that converts messages to json object for data transmission
     def send_message(self,message):
        
         self.socket.send(json.dumps({
@@ -26,12 +27,13 @@ class Client:
             'message': message
         }).encode())
 
-
+    # function that handles login
     def login(self, userName):
 
         self.nickname = userName
         client.isLogin = True 
 
+    # function that handles logout
     def logout(self):
         client.isLogin = False 
     
@@ -57,18 +59,31 @@ while True:
         client.id = id +1
         userList.append(client.nickname)
         print(userList)
-    else:
-        print("Error: Command should be login [username]")    
+    elif Client.isLogin is False:
+        print("Error: Command should be login [username] or exit for quit")    
 
     if client.isLogin is True:
-       print("You can send message now")
+       print("You can send message now, or type in help to see all commands")
        cmd = input()
-       if cmd.startswith("send"):
+        # command for sending message
+       if cmd.startswith("post"):
             message = cmd[5:]
             client.send_message(message)
+            #client.isLogin = False
+            print(f"posted {message}")
+        # display user list
+       elif cmd == "users":
+            print(userList)
+        # leave the chatroom
+       elif cmd == "leave":
             client.isLogin = False
-            print(f"sent {message}")
+        # check a certain message
+       elif cmd.startswith("message"):
+            index = cmd[8:]
+            #print(test_server.messageList[index])
+       else:
+            print("please enter connect to connect to a port, join to join a chatroom, post to post a message, users to see existing users, leave to leave the chatroom, message to retrieve a certain message, or exit to end the system.")
     else:
-        print("You have to login before sending message!")
+        print("You have to login to perform such action!")
     
        
