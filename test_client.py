@@ -44,10 +44,14 @@ class Client:
     def connect(self, address, portNum):
         client.socket.connect(address, portNum)
 
-
-    
-
-    
+    def receive_message_thread(self):
+        while self.hasJoined:
+            try:
+                buffer = self.socket.recv(1024).decode()
+                obj = json.loads(buffer)
+                print('[' + str(obj['sender_nickname']) + '(' + str(obj['sender_id']) + ')' + ']', obj['message'])
+            except Exception:
+                print("Error! Cannot retrieve data from the server!")
 
 
 clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
