@@ -30,10 +30,9 @@ class Client:
         }).encode())
 
     # function that handles message
-    def message(self,userName):
+    def message(self):
         self.socket.send(json.dumps({
-            'type': 'message',
-            'username':userName
+            'type': 'message'
         }).encode())
 
     # function that handles joining
@@ -87,11 +86,12 @@ while True:
             print(userList)
         elif cmd.startswith("message"):
             sender = cmd[8:]
-            client.message(sender)
+            sender_len = len(sender)
+            client.message()
             data = client.socket.recv(4096)
             data_arr = pickle.loads(data)
             for msg in data_arr:
-                if msg.startswith(sender):
+                if msg[:sender_len]==sender:
                     print(msg)
         elif cmd == "leave":
             client.hasJoined = False
