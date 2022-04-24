@@ -73,7 +73,7 @@ while True:
         if client.nickname not in userList:
             userList.append(client.nickname)
         print(userList)
-    elif cmd == exit:
+    elif cmd == "exit":
         sys.exit("GoodBye!")
     else:
         print("Error: Command should be login [username] or exit for quit")
@@ -102,4 +102,8 @@ while True:
         elif cmd == "exit":
             sys.exit("GoodBye!")
         else:
-            print("please enter connect to connect to a port, join to join a chatroom, post to post a message, users to see existing users, leave to leave the chatroom, message to retrieve a certain message, or exit to end the system.")
+            print("[help] Keyword post [message] for posting message")
+            print("[help] Keyword message [username] to see the message sent of a certain user")
+            print("[help] Keyword users to see current user list")
+            print("[help] Keyword leave to leave the groupchat")
+            print("[help] Keyword exit for forcequit the system")
