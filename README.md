@@ -1,5 +1,21 @@
 # BulletinBoard
 
+How to use:
+
+1. `git clone https://github.com/Tronginx/BulletinBoard.git`
+2. open two terminals in at the project folder
+3. `python server.py`
+4. `python client.py`
+5. type commands in client terminal following the instructions
+
+Command manual:
+
+`post [message]` to send message to server.
+`message [username]` to see all the messages sent by a certain user").
+`users` to retrieve current user list").
+`leave` to leave the log out").
+`exit` to exit the program").
+
 #### Requirements:
 
 #### part 1

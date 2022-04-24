@@ -1,6 +1,7 @@
 import socket
 import json
 import pickle
+import sys
 
 messageList = []
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -21,6 +22,8 @@ while True:
             elif obj['type'] == 'message':
                 data = pickle.dumps(messageList)
                 client_socket.send(data)
+    except:
+        sys.exit("Failed to establish connection")
     finally:
         client_socket.close()
         
