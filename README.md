@@ -1,6 +1,18 @@
-# BulletinBoard
+# CSE3461 Project 2: Bulletin Board
 
-How to use:
+##### Group member:
+
+Daqian Zuo(zuo.115)
+
+Hezhuang Tian(tian.593)
+
+---
+
+#### Features need to be implement later:
+
+1. multi-threading client and server
+2. Options for joining in different chat group
+#### How to use:
 
 1. `git clone https://github.com/Tronginx/BulletinBoard.git`
 2. open two terminals in at the project folder
@@ -8,7 +20,9 @@ How to use:
 4. `python client.py`
 5. type commands in client terminal following the instructions
 
-Command manual:
+#### Command manual:
+
+P.S. default host address and port number are **127.0.0.1** and **8888**
 
 `post [message]` to send message to server.
 `message [username]` to see all the messages sent by a certain user").
