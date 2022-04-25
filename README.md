@@ -24,11 +24,11 @@ Hezhuang Tian(tian.593)
 
 P.S. default host address and port number are **127.0.0.1** and **8888**
 
-`post [message]` to send message to server.
-`message [username]` to see all the messages sent by a certain user").
-`users` to retrieve current user list").
-`leave` to leave the log out").
-`exit` to exit the program").
+- `post [message]` to send message to server.
+- `message [username]` to see all the messages sent by a certain user").
+- `users` to retrieve current user list").
+- `leave` to leave the log out").
+- `exit` to exit the program").
 
 #### Requirements:
 
